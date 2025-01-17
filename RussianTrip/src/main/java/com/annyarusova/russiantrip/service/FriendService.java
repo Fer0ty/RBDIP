@@ -16,13 +16,8 @@ public class FriendService {
     private UserRepository userRepository;
 
     public void addFriend(String user, String friend_login) {
-        Optional<UserEntity> friend = userRepository.findByLogin(friend_login);
-        if (friend.isEmpty())
-            throw new IllegalArgumentException("User with login " + friend_login + " not found");
-
-        Optional<UserEntity> userEntity = userRepository.findByLogin(user);
-        if (userEntity.isEmpty())
-            throw new IllegalArgumentException("User with login " + user + " not found");
+        Optional<UserEntity> friend = getUserEntity(friend_login);
+        Optional<UserEntity> userEntity = getUserEntity(user);
 
         if (userEntity.get().getFriends().contains(friend.get()))
             throw new IllegalArgumentException("User with login " + user + " already has friend with login " + friend_login);
@@ -32,13 +27,8 @@ public class FriendService {
     }
 
     public void removeFriend(String user, String friend_login) {
-        Optional<UserEntity> friend = userRepository.findByLogin(friend_login);
-        if (friend.isEmpty())
-            throw new IllegalArgumentException("User with login " + friend_login + " not found");
-
-        Optional<UserEntity> userEntity = userRepository.findByLogin(user);
-        if (userEntity.isEmpty())
-            throw new IllegalArgumentException("User with login " + user + " not found");
+        Optional<UserEntity> friend = getUserEntity(friend_login);
+        Optional<UserEntity> userEntity = getUserEntity(user);
 
         if (!userEntity.get().getFriends().contains(friend.get()))
             throw new IllegalArgumentException("User with login " + user + " does not have friend with login " + friend_login);
@@ -53,5 +43,12 @@ public class FriendService {
             throw new IllegalArgumentException("User with login " + user + " not found");
 
         return userEntity.get().getFriends().stream().map(UserPersonalData::new).collect(Collectors.toList());
+    }
+
+    private Optional<UserEntity> getUserEntity(String login) {
+        Optional<UserEntity> user = userRepository.findByLogin(login);
+        if (user.isEmpty())
+            throw new IllegalArgumentException("User with login " + login + " not found");
+        return user;
     }
 }

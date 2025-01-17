@@ -1,10 +1,6 @@
 package com.annyarusova.russiantrip.controller;
 
-import com.annyarusova.russiantrip.dto.LoginContext;
-import com.annyarusova.russiantrip.dto.UserPersonalData;
 import com.annyarusova.russiantrip.service.FriendService;
-import com.annyarusova.russiantrip.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/friends")
 @CrossOrigin
 public class FriendController {
-    @Autowired
-    private FriendService friendService;
-    @PostMapping("/add")
+
+    private final FriendService friendService = new FriendService();
+
+    @PostMapping
     public ResponseEntity addFriend(@RequestParam String user, @RequestParam String friendLogin) {
         try {
             friendService.addFriend(user, friendLogin);
@@ -24,7 +21,7 @@ public class FriendController {
         }
     }
 
-    @PostMapping("/remove")
+    @DeleteMapping
     public ResponseEntity removeFriend(@RequestParam String user, @RequestParam String friendLogin) {
         try {
             friendService.removeFriend(user, friendLogin);
@@ -34,7 +31,7 @@ public class FriendController {
         }
     }
 
-    @PostMapping("/all")
+    @GetMapping
     public ResponseEntity getFriends(@RequestParam String user) {
         try {
             return ResponseEntity.ok(friendService.getFriends(user));
