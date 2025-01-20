@@ -1,18 +1,20 @@
 package com.annyarusova.russiantrip.controller;
 
 import com.annyarusova.russiantrip.service.FriendService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/friends")
 @CrossOrigin
+@RequiredArgsConstructor
 public class FriendController {
 
-    private final FriendService friendService = new FriendService();
+    private final FriendService friendService;
 
     @PostMapping
-    public ResponseEntity addFriend(@RequestParam String user, @RequestParam String friendLogin) {
+    public ResponseEntity<?> addFriend(@RequestParam String user, @RequestParam String friendLogin) {
         try {
             friendService.addFriend(user, friendLogin);
             return ResponseEntity.ok("Друг успешно добавлен");
@@ -22,7 +24,7 @@ public class FriendController {
     }
 
     @DeleteMapping
-    public ResponseEntity removeFriend(@RequestParam String user, @RequestParam String friendLogin) {
+    public ResponseEntity<?> removeFriend(@RequestParam String user, @RequestParam String friendLogin) {
         try {
             friendService.removeFriend(user, friendLogin);
             return ResponseEntity.ok("Друг успешно удален");
@@ -32,7 +34,7 @@ public class FriendController {
     }
 
     @GetMapping
-    public ResponseEntity getFriends(@RequestParam String user) {
+    public ResponseEntity<?> getFriends(@RequestParam String user) {
         try {
             return ResponseEntity.ok(friendService.getFriends(user));
         } catch (Exception e) {

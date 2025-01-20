@@ -3,7 +3,7 @@ package com.annyarusova.russiantrip.service;
 import com.annyarusova.russiantrip.dto.UserPersonalData;
 import com.annyarusova.russiantrip.entity.UserEntity;
 import com.annyarusova.russiantrip.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class FriendService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public void addFriend(String user, String friend_login) {
         Optional<UserEntity> friend = getUserEntity(friend_login);

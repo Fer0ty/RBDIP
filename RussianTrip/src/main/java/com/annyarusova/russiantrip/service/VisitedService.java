@@ -7,7 +7,7 @@ import com.annyarusova.russiantrip.entity.UserEntity;
 import com.annyarusova.russiantrip.repository.MapRepository;
 import com.annyarusova.russiantrip.repository.RegionRepository;
 import com.annyarusova.russiantrip.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +15,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class VisitedService {
-    @Autowired
-    private RegionRepository regionRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private MapRepository mapRepository;
+    private final RegionRepository regionRepository;
+    private final UserRepository userRepository;
+    private final MapRepository mapRepository;
 
     public List<RegionDto> getRegionRepository(String login) {
         Optional<UserEntity> user = getUserEntity(login);

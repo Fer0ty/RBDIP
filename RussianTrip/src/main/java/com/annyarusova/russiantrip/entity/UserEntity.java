@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user1_login", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "user2_login", nullable = false)
     )
-    private List<UserEntity> friends;
+    private List<UserEntity> friends  = new ArrayList<>();;
 
     @ManyToMany()
     @JoinTable(
@@ -47,5 +48,5 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_login", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "trip_id", nullable = false)
     )
-    private List<TripEntity> trips;
+    private List<TripEntity> trips  = new ArrayList<>();;
 }
