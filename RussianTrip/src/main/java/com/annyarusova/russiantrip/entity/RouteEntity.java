@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -28,11 +28,11 @@ public class RouteEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "start_time", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime startTime;
+    @Column(name = "start_time", columnDefinition = "DATE", nullable = false)
+    private LocalDate startTime;
 
-    @Column(name = "end_time", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime endTime;
+    @Column(name = "end_time", columnDefinition = "DATE", nullable = false)
+    private LocalDate endTime;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
