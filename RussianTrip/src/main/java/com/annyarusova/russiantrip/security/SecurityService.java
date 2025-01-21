@@ -1,0 +1,23 @@
+package com.annyarusova.russiantrip.security;
+
+import com.annyarusova.russiantrip.entity.UserEntity;
+import com.annyarusova.russiantrip.service.AuthService;
+import com.annyarusova.russiantrip.service.PlaceService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class SecurityService {
+    private final AuthService authService;
+    private final PlaceService placeService;
+
+    public boolean canEditPlace(Integer placeId) {
+        UserEntity user = authService.getAuthenticatedUser();
+        return placeService.isPlaceOwner(placeId, user);
+    }
+    public boolean canGetPlace(Integer placeId) {
+        UserEntity user = authService.getAuthenticatedUser();
+        return placeService.isOpenAccess(placeId) || placeService.isPlaceOwner(placeId, user);
+    }
+}

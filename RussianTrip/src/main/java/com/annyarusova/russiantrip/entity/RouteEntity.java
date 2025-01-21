@@ -38,9 +38,8 @@ public class RouteEntity {
     @JoinColumn(name = "type_id")
     private RouteTypeEntity routeTypeId;
 
-    @ManyToOne
-    @JoinColumn(name = "access_id", nullable = false)
-    private AccessEntity accessId;
+    @Column(name = "access", nullable = false)
+    private boolean access;
 
     @ManyToMany(mappedBy = "routes", cascade=CascadeType.ALL)
     private List<TripEntity> trips;

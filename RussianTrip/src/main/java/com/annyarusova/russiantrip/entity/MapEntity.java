@@ -32,9 +32,8 @@ public class MapEntity {
     @Column(name = "percent_visited", nullable = false)
     private int percentVisited;
 
-    @ManyToOne
-    @JoinColumn(name = "access_id", nullable = false)
-    private AccessEntity accessId;
+    @Column(name = "access", nullable = false)
+    private boolean access;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(

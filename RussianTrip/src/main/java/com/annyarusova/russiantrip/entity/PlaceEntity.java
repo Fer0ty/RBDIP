@@ -21,6 +21,9 @@ public class PlaceEntity {
     @Column(name = "place_id")
     private Integer placeId;
 
+    @Column(name = "login")
+    private String userLogin;
+
     @Column(name = "name")
     private String name;
 
@@ -34,11 +37,10 @@ public class PlaceEntity {
     private Integer amountComments;
 
     @Column(name = "rating_numeric")
-    private Integer ratingNumeric;
+    private double ratingNumeric;
 
-    @ManyToOne
-    @JoinColumn(name = "access_id", nullable = false)
-    private AccessEntity accessId;
+    @Column(name = "access", nullable = false)
+    private boolean access;
 
     @ManyToMany()
     @JoinTable(

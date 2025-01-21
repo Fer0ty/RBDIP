@@ -42,9 +42,8 @@ public class TripEntity {
     @JoinColumn(name = "status_id", nullable = false)
     private TripStatusEntity statusId;
 
-    @ManyToOne
-    @JoinColumn(name = "access_id", nullable = false)
-    private AccessEntity accessId;
+    @Column(name = "access", nullable = false)
+    private boolean access;
 
     @ManyToMany()
     @JoinTable(
