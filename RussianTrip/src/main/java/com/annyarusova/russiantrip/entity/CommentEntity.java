@@ -33,9 +33,8 @@ public class CommentEntity {
     @Column(name = "comment_date", columnDefinition = "DATE")
     private LocalDate commentDate;
 
-    @ManyToOne
-    @JoinColumn(name = "author_login", nullable = false, unique = true)
-    private UserEntity authorLogin;
+    @Column(name = "author_login", nullable = false, unique = true)
+    private String userLogin;
 
     @ManyToOne
     @JoinColumn(name = "place_id")

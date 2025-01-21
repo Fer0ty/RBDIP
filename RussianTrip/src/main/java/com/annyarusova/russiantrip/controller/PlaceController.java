@@ -61,16 +61,23 @@ public class PlaceController {
         return ResponseEntity.ok(createdComment);
     }
 
+    @GetMapping("/{id}/comments/{commentId}")
+    @PreAuthorize("@securityService.canGetPlace(#id)")
+    public ResponseEntity<CommentEntity> getComment(@PathVariable Integer id, @PathVariable Integer commentId) {
+        CommentEntity createdComment = commentService.getCommentById(id, commentId);
+        return ResponseEntity.ok(createdComment);
+    }
+
     @DeleteMapping("/{id}/comments/{commentId}")
     @PreAuthorize("@securityService.canEditComment(#commentId)")
     public ResponseEntity<CommentEntity> deleteComment(@PathVariable Integer id, @PathVariable Integer commentId) {
-        commentService.deleteComment(commentId);
+        commentService.deleteComment(id, commentId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/comments")
     @PreAuthorize("@securityService.canGetPlace(#id)")
-    public ResponseEntity<List<CommentEntity>> getCommentsForPlace(@PathVariable Integer id, @RequestParam String user) {
+    public ResponseEntity<List<CommentEntity>> getCommentsForPlace(@PathVariable Integer id) {
         List<CommentEntity> comments = commentService.getCommentsForPlace(id);
         return ResponseEntity.ok(comments);
     }

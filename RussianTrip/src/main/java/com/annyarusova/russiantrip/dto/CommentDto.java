@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
-    private Integer commentId;
     private String name;
     private String description;
     private Integer ratingNumeric;

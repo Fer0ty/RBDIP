@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class VisitedController {
     
     private final VisitedService visitedService;
-    
+
     @GetMapping
     public ResponseEntity<?> getAllRegions(@RequestParam String login) {
         try {

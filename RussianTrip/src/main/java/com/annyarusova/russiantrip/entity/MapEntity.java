@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,5 +42,5 @@ public class MapEntity {
             joinColumns = @JoinColumn(name = "map_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "region_id", nullable = false)
     )
-    private List<RegionEntity> regions;
+    private List<RegionEntity> regions = new ArrayList<>();
 }

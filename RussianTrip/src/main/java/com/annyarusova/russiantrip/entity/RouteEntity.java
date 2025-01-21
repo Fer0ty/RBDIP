@@ -43,7 +43,4 @@ public class RouteEntity {
 
     @ManyToMany(mappedBy = "routes", cascade=CascadeType.ALL)
     private List<TripEntity> trips;
-
-    @ManyToMany(mappedBy = "routes", cascade=CascadeType.ALL)
-    private List<PlaceEntity> places;
 }

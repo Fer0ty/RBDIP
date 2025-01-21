@@ -30,7 +30,7 @@ public class PlaceEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "location", columnDefinition = "POINT")
+    @Column(name = "location")
     private String location;
 
     @Column(name = "amount_comments")
@@ -41,12 +41,4 @@ public class PlaceEntity {
 
     @Column(name = "access", nullable = false)
     private boolean access;
-
-    @ManyToMany()
-    @JoinTable(
-            name = "route_places",
-            joinColumns = @JoinColumn(name = "place_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "route_id", nullable = false)
-    )
-    private List<RouteEntity> routes;
 }

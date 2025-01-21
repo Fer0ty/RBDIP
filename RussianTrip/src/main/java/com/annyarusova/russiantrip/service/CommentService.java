@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class CommentService {
         comment.setDescription(commentDto.getDescription());
         comment.setRatingNumeric(commentDto.getRatingNumeric());
         comment.setCommentDate(LocalDate.now()); // Устанавливаем текущую дату как дату комментария
-        comment.setAuthorLogin(user);
+        comment.setUserLogin(user.getLogin());
         comment.setPlaceId(place);
 
         if (place.getAmountComments() != 0) {
@@ -48,10 +49,13 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public void deleteComment(Integer commentId) {
+    public void deleteComment(Integer id, Integer commentId) {
         CommentEntity existingComment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("Комментарий не найден"));
 
+        if (!Objects.equals(id, existingComment.getPlaceId().getPlaceId())) {
+            throw new IllegalArgumentException("Комментарий по месту не найден");
+        }
         PlaceEntity place = existingComment.getPlaceId();
         if (place != null) {
             // Удаляем комментарий и пересчитываем рейтинг места
@@ -76,7 +80,14 @@ public class CommentService {
                 .toList();
     }
 
+    public CommentEntity getCommentById(Integer placeId, Integer commentId) {
+        placeRepository.findById(placeId)
+                .orElseThrow(() -> new IllegalArgumentException("Место не найдено"));
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Комментарий не найден"));
+    }
+
     public boolean isCommentOwner(Integer placeId, UserEntity user) {
-        return commentRepository.existsByIdAndAuthor(placeId, user);
+        return commentRepository.existsByIdAndAuthor(placeId, user.getLogin());
     }
 }

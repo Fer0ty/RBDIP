@@ -48,5 +48,5 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_login", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "trip_id", nullable = false)
     )
-    private List<TripEntity> trips  = new ArrayList<>();;
+    private List<TripEntity> trips  = new ArrayList<>();
 }
