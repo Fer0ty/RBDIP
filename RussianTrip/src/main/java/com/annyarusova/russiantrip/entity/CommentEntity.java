@@ -40,12 +40,4 @@ public class CommentEntity {
     @ManyToOne
     @JoinColumn(name = "place_id")
     private PlaceEntity placeId;
-
-    @ManyToOne
-    @JoinColumn(name = "trip_id")
-    private TripEntity tripId;
-
-    @ManyToOne
-    @JoinColumn(name = "route_id")
-    private RouteEntity routeId;
 }
