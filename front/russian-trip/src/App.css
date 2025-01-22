@@ -1,0 +1,44 @@
+.form-container {
+  display: flex;
+  flex-direction: column; /* Расположение элементов в столбик */
+  gap: 15px; /* Отступы между элементами */
+  align-items: center; /* Центрирование элементов */
+}
+
+.form-input {
+  width: 100%; /* Поля ввода занимают всю ширину контейнера */
+  max-width: 300px; /* Ограничение максимальной ширины */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-button {
+  width: 100%; /* Кнопки занимают всю ширину контейнера */
+  max-width: 300px; /* Ограничение максимальной ширины */
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.form-link {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
