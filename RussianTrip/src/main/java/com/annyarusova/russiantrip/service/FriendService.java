@@ -19,6 +19,9 @@ public class FriendService {
         Optional<UserEntity> friend = getUserEntity(friend_login);
         Optional<UserEntity> userEntity = getUserEntity(user);
 
+        if (user.equals(friend_login)){
+            throw new IllegalArgumentException("Schizophrenic?");
+        }
         if (userEntity.get().getFriends().contains(friend.get()))
             throw new IllegalArgumentException("User with login " + user + " already has friend with login " + friend_login);
 
